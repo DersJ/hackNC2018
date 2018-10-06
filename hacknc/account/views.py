@@ -22,5 +22,9 @@ def signup(request):
     return render(request, 'registration/signup.html', {'form': form})
 
 class ProfileView(generic.DetailView):
+
+    context_object_name = 'tournament'
+    template_name = 'registration/profile.html'
+
     def get_object(self):
         return self.request.user
