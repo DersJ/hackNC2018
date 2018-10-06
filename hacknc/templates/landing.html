@@ -2,9 +2,23 @@
 
 {% block content %}
 
-    		<p2>
-    			<br></br>
-    			Info here pls
-    		</p2>
+<div class="jumbotron">
+	<h1 class="display-2">
+		Help me
+	</h1>
+	<p class="lead">
+		I need some help.
+	</p>
+	<hr class="my-2">
+	<p>
+		I still need help.
+	</p>
+	<a class="btn btn-primary" href="{% url 'housing:tournament-list' %}" role="button">
+		Find Tournament
+	</a>
+	<a class="btn btn-secondary" href="{% url 'housing:tournament-create' %}" role="button">
+		Register Tournament
+	</a>
+</div>
 
 {% endblock %}
