@@ -5,10 +5,10 @@
 {% block title %}Add a Host{% endblock %}
 
 {% block content %}
-<h1>Add a Host to {{ form.tournament.name }}</h1>
+<h1>Add a Team to {{ form.tournament.name }}</h1>
 <form method="post">
   {{ form|crispy }}
   {% csrf_token %}
-  <button class="btn btn-primary" type="submit">Create Host</button>
+  <button class="btn btn-primary" type="submit">Create Team</button>
 </form>
 {% endblock %}

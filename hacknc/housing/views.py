@@ -52,6 +52,15 @@ class TournamentDetailView(generic.DetailView):
 class HostCreateView(generic.FormView):
     form_class= forms.HostForm
     template_name = 'housing/host-create.html'
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['tournament'] = get_object_or_404(
+            models.Tournament,
+            slug=self.kwargs.get('slug'),
+            slug_key=self.kwargs.get('slug_key'),
+        )
+        return kwargs
+
     def form_valid(self, form):
         tournament = get_object_or_404(
             models.Tournament,
@@ -62,6 +71,28 @@ class HostCreateView(generic.FormView):
         host = form.save(tournament)
         return redirect(tournament.get_absolute_url())
 
+
+class TeamCreateView(generic.FormView):
+    form_class= forms.TeamForm
+    template_name = 'housing/team-create.html'
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['tournament'] = get_object_or_404(
+            models.Tournament,
+            slug=self.kwargs.get('slug'),
+            slug_key=self.kwargs.get('slug_key'),
+        )
+        return kwargs
+
+    def form_valid(self, form):
+        tournament = get_object_or_404(
+            models.Tournament,
+            slug=self.kwargs.get('slug'),
+            slug_key=self.kwargs.get('slug_key'),
+        )
+
+        team = form.save(tournament)
+        return redirect(tournament.get_absolute_url())
 
 
 

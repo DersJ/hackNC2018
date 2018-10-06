@@ -35,6 +35,10 @@
     
     		<br></br>
     		<p3>Description: {{ tournament.description|linebreaks }}</p3>
+
+    <a class="btn btn-primary" role="button" href = "{% url 'housing:team-create' tournament.slug_key tournament.slug %}">add a team</a>
+    <a class="btn btn-success" role="button" href = "{% url 'housing:host-create' tournament.slug_key tournament.slug %}">add a host</a>
+
 	
 </div>
 {% endblock %}
