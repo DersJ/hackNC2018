@@ -2,14 +2,9 @@
 
 {% block content %}
 <div class="container">
-	
-	<div class="row">
-    	<div class="col-sm-8">
-    		<h1>{{ tournament.name }}</h1>
-    	</div>
-    </div>
-		
-	<div class="row">
+	<h1 class="border-bottom pb-2 mb-5">{{ tournament.name }}</h1>
+
+	<div class="row my-3">
     	<div class="col-sm-4">
     		<h3>Start Date</h3>
     	</div>
@@ -20,33 +15,52 @@
     		<h3>Location</h3>
     	</div>
     </div>
-    
+
     <div class="row">
-    	<div class="col-sm-4">
+    	<div class="col-md-4">
     		<p>{{ tournament.date_start }}</p>
     	</div>
-    	<div class="col-sm-4">
+    	<div class="col-md-4">
     		<p>{{ tournament.date_end }}</p>
     	</div>
-    	<div class="col-sm-4">
+    	<div class="col-md-4">
     		<p>{{ tournament.location }}</p>
     	</div>
     </div>
-    
-    		<br><br>
-    		<p>Description: {{ tournament.description|linebreaks }}</p>
-    <div class="row">
-        <div class="col-sm-4">
+
+    <div class="my-5">
+        {% if tournament.description %}
+            <h3>Description</h3>
+            {{ tournament.description|linebreaks }}
+        {% endif %}
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title">Register Team</h3>
+                    <p class="card-text">
+                        Register your team for this tournament to be matched with a host.
+                    </p>
+                    <a class="btn btn-primary" href="{% url 'housing:team-create' tournament.slug_key tournament.slug %}">Register Team</a>
+                </div>
+            </div>
         </div>
-        <div class="col-sm-4">
-            <a class="btn btn-primary" role="button" href = "{% url 'housing:team-create' tournament.slug_key tournament.slug %}">Register Team</a>
-            <a class="btn btn-success" role="button" href = "{% url 'housing:host-create' tournament.slug_key tournament.slug %}">Register Host</a>
-        </div>
-        <div class="col-sm-4">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title">Register Host</h3>
+                    <p class="card-text">
+                        Register your accomodation to host a team for this tournament.
+                    </p>
+                    <a class="btn btn-success" href="{% url 'housing:host-create' tournament.slug_key tournament.slug %}">Register Host</a>
+                </div>
+            </div>
         </div>
     </div>
 
 
-	
+
 </div>
 {% endblock %}
