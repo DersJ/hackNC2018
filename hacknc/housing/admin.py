@@ -39,6 +39,21 @@ class HostAdmin(admin.ModelAdmin):
     readonly_fields = ('time_created',)
     search_fields = ('email', 'name', 'tournament__name')
 
+@admin.register(models.Team)
+class TeamAdmin(admin.ModelAdmin):
+    autocomplete_fields = ('tournament',)
+    date_hierarchy = 'time_created'
+    fields = (
+        'tournament',
+        'name',
+        'player_count',
+        'arrival_time',
+        'time_created',
+    )
+    list_display = ('name', 'tournament', 'player_count', 'arrival_time')
+    readonly_fields = ('time_created',)
+    search_fields = ('name', 'tournament__name')
+
 
 @admin.register(models.Tournament)
 class TournamentAdmin(admin.ModelAdmin):

@@ -82,6 +82,52 @@ class Host(models.Model):
         return self.name
 
 
+class Team(models.Model):
+    """
+    A team attending a tournament.
+    """
+    arrival_time = models.DateTimeField(
+        help_text=_('An estimated arrival time of the team.'),
+        verbose_name=_('arrival time'),
+    )
+    id = models.UUIDField(
+        default=uuid.uuid4,
+        primary_key=True,
+        unique=True,
+        verbose_name=_('ID'),
+    )
+    name = models.CharField(
+        help_text=_('The name of the team.'),
+        max_length=255,
+        verbose_name=_('name'),
+    )
+    player_count = models.PositiveSmallIntegerField(
+        help_text=_('The number of team members who need housing.'),
+        verbose_name=_('player count'),
+    )
+    time_created = models.DateTimeField(
+        auto_now_add=True,
+        help_text=_('The time the team registered.'),
+        verbose_name=_('time created'),
+    )
+    tournament = models.ForeignKey(
+        'housing.Tournament',
+        help_text=_('The tournament the team is attending.'),
+        on_delete=models.CASCADE,
+        related_name='teams',
+        related_query_name='team',
+        verbose_name=_('tournament'),
+    )
+
+    class Meta:
+        ordering = ('time_created',)
+        verbose_name = _('team')
+        verbose_name_plural = _('teams')
+
+    def __str__(self):
+        return self.name
+
+
 class Tournament(models.Model):
     """
     A tournament ocurrs over a set time period in a location.
