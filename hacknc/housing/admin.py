@@ -75,7 +75,7 @@ class TournamentAdmin(admin.ModelAdmin):
         (
             _('Date'),
             {
-                'fields': ('date_start', 'date_end'),
+                'fields': ('date_start', 'date_end', 'date_lockout'),
             },
         ),
         (
@@ -92,6 +92,6 @@ class TournamentAdmin(admin.ModelAdmin):
             },
         ),
     )
-    list_display = ('name', 'date_start', 'date_end')
-    readonly_fields = ('slug', 'slug_key')
+    list_display = ('name', 'date_start', 'date_end', 'date_lockout')
+    readonly_fields = ('date_lockout', 'slug', 'slug_key')
     search_fields = ('location', 'name')

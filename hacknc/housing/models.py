@@ -137,6 +137,12 @@ class Tournament(models.Model):
         help_text=_('The end date of the tournament.'),
         verbose_name=_('end date'),
     )
+    date_lockout = models.DateTimeField(
+        editable=False,
+        help_text=_('The date and time to freeze host and team registrations '
+                    'at. This may not be edited.'),
+        verbose_name=_('registration lockout date'),
+    )
     date_start = models.DateField(
         help_text=_('The start date of the tournament.'),
         verbose_name=_('start date'),
