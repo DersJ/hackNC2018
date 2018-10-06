@@ -49,7 +49,7 @@ class TournamentDetailView(generic.DetailView):
             slug_key=self.kwargs.get('slug_key'),
         )
 
-class HostCreateView(generic.FormView):
+class HostCreateView(LoginRequiredMixin, generic.FormView):
     form_class= forms.HostForm
     template_name = 'housing/host-create.html'
     def get_form_kwargs(self):
@@ -72,7 +72,7 @@ class HostCreateView(generic.FormView):
         return redirect(tournament.get_absolute_url())
 
 
-class TeamCreateView(generic.FormView):
+class TeamCreateView(LoginRequiredMixin, generic.FormView):
     form_class= forms.TeamForm
     template_name = 'housing/team-create.html'
     def get_form_kwargs(self):

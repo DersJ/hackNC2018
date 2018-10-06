@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from account.forms import SignUpForm
 from django.contrib.auth import login, authenticate
+from django.views import generic
 
 def loginview(request):
 	return render(request, 'login.html')
@@ -19,3 +20,7 @@ def signup(request):
     else:
         form = SignUpForm()
     return render(request, 'registration/signup.html', {'form': form})
+
+class ProfileView(generic.DetailView):
+    def get_object(self):
+        return self.request.user
