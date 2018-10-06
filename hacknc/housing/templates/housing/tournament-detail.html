@@ -33,11 +33,19 @@
     	</div>
     </div>
     
-    		<br></br>
-    		<p3>Description: {{ tournament.description|linebreaks }}</p3>
+    		<br><br>
+    		<p>Description: {{ tournament.description|linebreaks }}</p>
+    <div class="row">
+        <div class="col-sm-4">
+        </div>
+        <div class="col-sm-4">
+            <a class="btn btn-primary" role="button" href = "{% url 'housing:team-create' tournament.slug_key tournament.slug %}">Register Team</a>
+            <a class="btn btn-success" role="button" href = "{% url 'housing:host-create' tournament.slug_key tournament.slug %}">Register Host</a>
+        </div>
+        <div class="col-sm-4">
+        </div>
+    </div>
 
-    <a class="btn btn-primary" role="button" href = "{% url 'housing:team-create' tournament.slug_key tournament.slug %}">add a team</a>
-    <a class="btn btn-success" role="button" href = "{% url 'housing:host-create' tournament.slug_key tournament.slug %}">add a host</a>
 
 	
 </div>
