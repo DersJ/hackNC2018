@@ -3,7 +3,30 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
+<div class="container">
+	<div class="row">
+		<div class="col-sm-4">
 
-{{user.username}}
+			<div class="card" style="width: 18rem">
+				<div class="card-body">
+					{% if user.name %}
+					<h4 class="card-title">{{user.name}}</h4>
+					<h5 class="card-subtitle mb-2 text-muted">@{{user.username}}</h4>
+
+					{% else %}
+					<h4 class="card-title">@{{user.username}}</h4>
+					{% endif %}
+					
+					<p class="card-text">{{user.email}}</p>
+				</div>
+			</div>
+
+		</div>
+		<div class="col-sm-8">
+			<h5>Match Info Here</h5>
+		</div>
+	</div>
+</div>
+
 
 {% endblock %}

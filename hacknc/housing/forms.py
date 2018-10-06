@@ -9,7 +9,7 @@ class TournamentForm(forms.ModelForm):
     """
 
     class Meta:
-        fields = ('name', 'location', 'date_start', 'date_end', 'description')
+        fields = ('name', 'location', 'date_start', 'date_end', 'date_lockout', 'description')
         model = models.Tournament
 
     def save(self, user, *args, **kwargs):

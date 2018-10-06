@@ -61,6 +61,12 @@ class User(PermissionsMixin, AbstractBaseUser):
         unique=True,
         verbose_name=_('username'),
     )
+    email = models.EmailField(
+        help_text=_('email to contact user'),
+        max_length=200,
+        unique=True,
+        verbose_name=_('email'),
+        )
 
     # Custom Manager
     objects = managers.UserManager()
