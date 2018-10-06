@@ -4,15 +4,37 @@
 <div class="container">
 	
 	<div class="row">
-    	<div class="col-sm-2">
+    	<div class="col-sm-8">
     		<h1>{{ tournament.name }}</h1>
     	</div>
     </div>
 		
-	<div class="row"> Start date: {{ tournament.date_start }}</div>
-	<div>{{ tournament.date_end }}</div>
-	<div>{{ tournament.description }}</div>
-	<div>{{ tournament.location }}</div>
+	<div class="row">
+    	<div class="col-sm-4">
+    		<h3>Start Date</h3>
+    	</div>
+    	<div class="col-sm-4">
+    		<h3>End Date</h3>
+    	</div>
+    	<div class="col-sm-4">
+    		<h3>Location</h3>
+    	</div>
+    </div>
+    
+    <div class="row">
+    	<div class="col-sm-4">
+    		<p>{{ tournament.date_start }}</p>
+    	</div>
+    	<div class="col-sm-4">
+    		<p>{{ tournament.date_end }}</p>
+    	</div>
+    	<div class="col-sm-4">
+    		<p>{{ tournament.location }}</p>
+    	</div>
+    </div>
+    
+    		<br></br>
+    		<p3>Description: {{ tournament.description|linebreaks }}</p3>
 	
 </div>
 {% endblock %}
