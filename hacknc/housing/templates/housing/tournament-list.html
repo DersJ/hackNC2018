@@ -1,28 +1,35 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class="row">
+	<div class="col-sm-9">
+		<h1>Tournaments</h1>
+	</div>
+	<div class="col-sm-3 text-right">
+		<a class="btn btn-primary" href="#" role="button">Add Tournament</a>
+	</div>
+</div>
 
-<h1>Tournaments</h1>
-
-<table class="table">
-	<thead>
-		<tr>
-			<th scope="col">Name</th>
-			<th scope="col">Location</th>
-			<th scope="col">Start Date</th>
-			<th scope="col">End Date</th>
-		</tr>
-	</thead>
-	<tbody>
-      	{% for tournament in tournament_list %}
-      		<tr>
-  				<td scope="row"><a href="{{ tournament.get_absolute_url }}">{{ tournament.name }}</a></td>
-  				<td scope="row">{{ tournament.location }}</td>
-  				<td scope="row">{{ tournament.date_start }}</td>
-  				<td scope="row">{{ tournament.date_end }}</td>
-  			</tr>
-		{% endfor %}
-	</tbody>
-</table>
-
+<div class="row">
+	<table class="table">
+		<thead>
+			<tr>
+				<th scope="col">Name</th>
+				<th scope="col">Location</th>
+				<th scope="col">Start Date</th>
+				<th scope="col">End Date</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for tournament in tournament_list %}
+				<tr>
+					<td scope="row"><a href="{{ tournament.get_absolute_url }}">{{ tournament.name }}</a></td>
+					<td scope="row">{{ tournament.location }}</td>
+					<td scope="row">{{ tournament.date_start }}</td>
+					<td scope="row">{{ tournament.date_end }}</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
 {% endblock %}
