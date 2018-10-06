@@ -1,9 +1,18 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>{{ tournament.name }}</h1>
-<h1>{{ tournament.date_start }}</h1>
-<h1>{{ tournament.date_end }}</h1>
-<h1>{{ tournament.description }}</h1>
-<h1>{{ tournament.location }}</h1>
+<div class="container">
+	
+	<div class="row">
+    	<div class="col-sm-2">
+    		<h1>{{ tournament.name }}</h1>
+    	</div>
+    </div>
+		
+	<div class="row"> Start date: {{ tournament.date_start }}</div>
+	<div>{{ tournament.date_end }}</div>
+	<div>{{ tournament.description }}</div>
+	<div>{{ tournament.location }}</div>
+	
+</div>
 {% endblock %}
