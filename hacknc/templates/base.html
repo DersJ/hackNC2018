@@ -34,10 +34,10 @@
 					<a class="nav-link" href="/">Home</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">Tournaments</a>
+					<a class="nav-link" href="{% url 'housing:tournament-list' %}">Tournaments</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="/accounts/login/">Login</a>
+					<a class="nav-link" href="{% url 'login' %}">Login</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="/accounts/signup/">Register</a>
@@ -46,9 +46,18 @@
   		</div>
 	</nav>
 
-	{% block content %}
+<div class="row">
+    <div class="col-sm-2">
+    </div>
+    <div class="col-sm-8">
+    		{% block content %}
 
-	{% endblock %}
+			{% endblock %}
+    </div>
+    <div class="col-sm-2">
+    </div>
+  </div>
+	
 	
 	<footer class="page-footer font-small blue fixed-bottom">
 		<div class="footer-copyright text-center py-3">Contact Info:

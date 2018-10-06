@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
 <h1>Tournaments</h1>
 
 <ul>
-{% for tournament in tournaments %}
-  <li><a href="{{ tournament.get_absolute_url }}">{{ tournament.name }}</a></li>
+{% for tournament in tournament_list %}
+  <li class="list-group-item"><a href="{{ tournament.get_absolute_url }}">{{ tournament.name }}</a></li>
 {% endfor %}
 </ul>
 {% endblock %}
