@@ -22,4 +22,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', TemplateView.as_view(template_name='landing.html')),
     path('login/', include('account.urls')),
+    path('', include('housing.urls')),
 ]

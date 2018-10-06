@@ -2,6 +2,7 @@ import uuid
 
 from django.conf import settings
 from django.db import models
+from django.urls import reverse
 from django.utils.crypto import get_random_string
 from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
@@ -183,6 +184,12 @@ class Tournament(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse(
+            'housing:tournament-detail',
+            kwargs={'slug': self.slug, 'slug_key': self.slug_key},
+        )
 
     def save(self, *args, **kwargs):
         if not self.slug:
