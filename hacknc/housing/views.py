@@ -1,10 +1,20 @@
 from django.shortcuts import get_object_or_404
-from django.views.generic import DetailView
+from django.utils import timezone
+from django.views import generic
 
 from housing import models
 
 
-class TournamentDetailView(DetailView):
+class TournamentListView(generic.ListView):
+    template_name = 'housing/tournament-list.html'
+
+    def get_queryset(self):
+        return models.Tournament.objects.filter(
+            date_end__gte=timezone.now(),
+        )
+
+
+class TournamentDetailView(generic.DetailView):
     """
     View the details of a specific tournament.
     """
