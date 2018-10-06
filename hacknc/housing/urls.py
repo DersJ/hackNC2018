@@ -15,6 +15,11 @@ urlpatterns = [
         name='tournament-list',
     ),
     path(
+        'tournaments/create/',
+        views.TournamentCreateView.as_view(),
+        name='tournament-create',
+    ),
+    path(
         'tournaments/<slug-key:slug_key>/<slug:slug>/',
         views.TournamentDetailView.as_view(),
         name='tournament-detail',

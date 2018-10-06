@@ -1,8 +1,22 @@
-from django.shortcuts import get_object_or_404
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import get_object_or_404, redirect
 from django.utils import timezone
 from django.views import generic
 
-from housing import models
+from housing import forms, models
+
+
+class TournamentCreateView(LoginRequiredMixin, generic.FormView):
+    """
+    Create a new tournament.
+    """
+    form_class = forms.TournamentForm
+    template_name = 'housing/tournament-create.html'
+
+    def form_valid(self, form):
+        tournament = form.save(user=self.request.user)
+
+        return redirect(tournament.get_absolute_url())
 
 
 class TournamentListView(generic.ListView):

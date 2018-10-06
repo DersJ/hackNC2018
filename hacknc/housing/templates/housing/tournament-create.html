@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}Add a Tournament{% endblock %}
+
+{% block content %}
+<h1>Add a Tournament</h1>
+<form method="post">
+  {{ form|crispy }}
+  {% csrf_token %}
+  <button class="btn btn-primary" type="submit">Create Tournament</button>
+</form>
+{% endblock %}
