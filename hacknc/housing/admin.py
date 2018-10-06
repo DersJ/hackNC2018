@@ -6,12 +6,12 @@ from housing import models
 
 @admin.register(models.Host)
 class HostAdmin(admin.ModelAdmin):
-    autocomplete_fields = ('tournament',)
+    autocomplete_fields = ('tournament', 'match')
     fieldsets = (
         (
             None,
             {
-                'fields': ('tournament',),
+                'fields': ('tournament', 'match'),
             },
         ),
         (
@@ -38,6 +38,16 @@ class HostAdmin(admin.ModelAdmin):
     list_display = ('name', 'tournament', 'guests_preferred', 'guests_max')
     readonly_fields = ('time_created',)
     search_fields = ('email', 'name', 'tournament__name')
+
+
+@admin.register(models.HostTeamMatch)
+class HostTeamMatchAdmin(admin.ModelAdmin):
+    autocomplete_fields = ('team',)
+    fields = ('team', 'time_created')
+    list_display = ('team', 'time_created')
+    readonly_fields = ('time_created',)
+    search_fields = ('team__name', 'team__tournament__name')
+
 
 @admin.register(models.Team)
 class TeamAdmin(admin.ModelAdmin):

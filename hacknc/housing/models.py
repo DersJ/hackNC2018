@@ -50,6 +50,16 @@ class Host(models.Model):
         unique=True,
         verbose_name=_('ID'),
     )
+    match = models.ForeignKey(
+        'housing.HostTeamMatch',
+        blank=True,
+        help_text=_('The match object that the host is associated with.'),
+        null=True,
+        on_delete=models.SET_NULL,
+        related_name='hosts',
+        related_query_name='host',
+        verbose_name=_('match'),
+    )
     name = models.CharField(
         help_text=_('A name to identify the host.'),
         max_length=100,
@@ -81,6 +91,36 @@ class Host(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class HostTeamMatch(models.Model):
+    """
+    A match between a team and multiple hosts.
+    """
+    id = models.UUIDField(
+        default=uuid.uuid4,
+        primary_key=True,
+        unique=True,
+        verbose_name=_('ID'),
+    )
+    team = models.OneToOneField(
+        'housing.Team',
+        help_text=_('The team that is matched with the hosts.'),
+        on_delete=models.CASCADE,
+    )
+    time_created = models.DateTimeField(
+        auto_now_add=True,
+        help_text=_('The time the match was created.'),
+        verbose_name=_('time created'),
+    )
+
+    class Meta:
+        ordering = ('time_created',)
+        verbose_name = _('host team match')
+        verbose_name_plural = _('host team matches')
+
+    def __str__(self):
+        return f'Match for Team {self.team}'
 
 
 class Team(models.Model):
