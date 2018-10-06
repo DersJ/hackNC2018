@@ -48,3 +48,22 @@ class TournamentDetailView(generic.DetailView):
             slug=self.kwargs.get('slug'),
             slug_key=self.kwargs.get('slug_key'),
         )
+
+class HostCreateView(generic.FormView):
+    form_class= forms.HostForm
+    template_name = 'housing/host-create.html'
+    def form_valid(self, form):
+        tournament = get_object_or_404(
+            models.Tournament,
+            slug=self.kwargs.get('slug'),
+            slug_key=self.kwargs.get('slug_key'),
+        )
+
+        host = form.save(tournament)
+        return redirect(tournament.get_absolute_url())
+
+
+
+
+
+

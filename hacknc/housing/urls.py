@@ -24,4 +24,9 @@ urlpatterns = [
         views.TournamentDetailView.as_view(),
         name='tournament-detail',
     ),
+    path(
+        'tournaments/<slug-key:slug_key>/<slug:slug>/addhost/', 
+        views.HostCreateView.as_view(), 
+        name='host-create',
+        )
 ]

@@ -16,3 +16,12 @@ class TournamentForm(forms.ModelForm):
         self.instance.user = user
 
         return super().save(*args, **kwargs)
+
+
+class HostForm(forms.ModelForm):
+	class Meta:
+		fields = ('name', 'phone_number', 'email', 'address', 'guests_max', 'guests_preferred')
+		model = models.Host
+	def save(self, tournament, *args, **kwargs):
+		self.instance.tournament = tournament
+		return super().save(*args, **kwargs)
