@@ -131,14 +131,14 @@ class Team(models.Model):
 
 class Tournament(models.Model):
     """
-    A tournament ocurrs over a set time period in a location.
+    A tournament occurs over a set time period in a location.
     """
     date_end = models.DateField(
-        help_text=_('The start date of the tournament.'),
+        help_text=_('The end date of the tournament.'),
         verbose_name=_('end date'),
     )
     date_start = models.DateField(
-        help_text=_('The end date of the tournament.'),
+        help_text=_('The start date of the tournament.'),
         verbose_name=_('start date'),
     )
     description = models.TextField(
@@ -147,7 +147,7 @@ class Tournament(models.Model):
         help_text=_('Additional information about the tournament.'),
     )
     location = models.CharField(
-        help_text=_('The location where the tournament is ocurring.'),
+        help_text=_('The location where the tournament is occurring.'),
         max_length=255,
         verbose_name=_('location'),
     )
