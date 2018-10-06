@@ -9,6 +9,8 @@ git clone https://github.com/DersJ/hackNC2018
 cd hackNC2018
 mkvirtualenv --python python3.6 hackNC
 setvirtualenvproject
+
+pip install -r requirements.txt
 ```
 
 ### DB Config
