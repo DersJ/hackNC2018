@@ -4,6 +4,42 @@ from django.utils.translation import ugettext_lazy as _
 from housing import models
 
 
+@admin.register(models.Host)
+class HostAdmin(admin.ModelAdmin):
+    autocomplete_fields = ('tournament',)
+    fieldsets = (
+        (
+            None,
+            {
+                'fields': ('tournament',),
+            },
+        ),
+        (
+            _('Accomodation Information'),
+            {
+                'fields': ('address', 'guests_preferred', 'guests_max'),
+            },
+        ),
+        (
+            _('Contact Information'),
+            {
+                'fields': ('name', 'email', 'phone_number'),
+            },
+        ),
+        (
+
+            _('Time Information'),
+            {
+                'classes': ('collapse',),
+                'fields': ('time_created',),
+            },
+        ),
+    )
+    list_display = ('name', 'tournament', 'guests_preferred', 'guests_max')
+    readonly_fields = ('time_created',)
+    search_fields = ('email', 'name', 'tournament__name')
+
+
 @admin.register(models.Tournament)
 class TournamentAdmin(admin.ModelAdmin):
     autocomplete_fields = ('user',)
