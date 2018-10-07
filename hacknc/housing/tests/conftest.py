@@ -9,6 +9,7 @@ class HostFactory(factory.django.DjangoModelFactory):
     guests_preferred = 8
     name = factory.Sequence(lambda n: f'Host {n}')
     tournament = factory.SubFactory('housing.tests.conftest.TournamentFactory')
+    user = factory.SubFactory('housing.tests.conftest.UserFactory')
 
     class Meta:
         model = 'housing.Host'
@@ -19,6 +20,7 @@ class TeamFactory(factory.django.DjangoModelFactory):
     name = factory.Sequence(lambda n: f'Team {n}')
     player_count = 21
     tournament = factory.SubFactory('housing.tests.conftest.TournamentFactory')
+    user = factory.SubFactory('housing.tests.conftest.UserFactory')
 
     class Meta:
         model = 'housing.Team'
@@ -37,6 +39,7 @@ class TournamentFactory(factory.django.DjangoModelFactory):
 
 
 class UserFactory(factory.django.DjangoModelFactory):
+    email = factory.Sequence(lambda n: f'test{n}@example.com')
     name = 'John Smith'
     password = 'password'
     username = factory.Sequence(lambda n: f'user{n}')
