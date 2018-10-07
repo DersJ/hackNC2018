@@ -4,35 +4,24 @@
 <div class="container">
 	<h1 class="border-bottom pb-2 mb-5">{{ tournament.name }}</h1>
 
-	<div class="row my-3">
-    	<div class="col-sm-3">
-    		<h3>Start Date</h3>
-    	</div>
-    	<div class="col-sm-3">
-    		<h3>End Date</h3>
-    	</div>
-    	<div class="col-sm-3">
-    		<h3>Location</h3>
-    	</div>
-        <div class="col-sm-3">
-            <h3>Register by</h3>
-        </div>
-    </div>
-
     <div class="row">
-    	<div class="col-md-3">
-    		<p>{{ tournament.date_start }}</p>
-    	</div>
-    	<div class="col-md-3">
-    		<p>{{ tournament.date_end }}</p>
-    	</div>
-    	<div class="col-md-3">
-    		<p>{{ tournament.location }}</p>
-    	</div>
-        <div class="col-md-3">
-            <p>{{ tournament.date_lockout }}</p>
-        </div>
-    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Dates</th>
+                <th scope="col">Location</th>
+                <th scope="col">Registration Deadline</th>
+            </tr>
+        </thead>
+        <tbody>
+                <tr>
+                    <td scope="row">{{ tournament.date_start }} - {{tournament.date_end}}</td>
+                    <td scope="row">{{ tournament.location }}</td>
+                    <td scope="row">{{ tournament.date_lockout }}</td>
+                </tr>
+        </tbody>
+    </table>
+</div>
 
     <div class="my-5">
         {% if tournament.description %}
@@ -74,12 +63,12 @@
     </div>
     <div class="row mt-4">
         <div class="col text-center">
-
+            <div class="google-maps">
             <iframe width="750" height="400"
             frameborder="0" style="border:0"
             src="https://www.google.com/maps/embed/v1/place?key=AIzaSyD9DlzWco-IDu97eFELfA_lwZn17c0Qwnk
             &q={{tournament.location|urlencode}}" allowfullscreen>
-        </iframe>
+        </iframe></div>
 
         </div>
     </div>

@@ -11,15 +11,25 @@
 <div class="col">
 
 <div class="card"><div class="card-body">
-<div class="card-title">
-<h4>{{host.name}} residence</h4></div>
+
+<div class="row d-flex align-items-center">
+<div class="col-sm-4">
+<div class="card-title"><h4>{{host.name}} residence</h4></div>
 <h6>Contact Info:</h6>
 <ul>
 	<li>{{host.address}}</li>
 	<li>{{host.get_pretty_phone_number}}</li>
 	<li>{{host.email}}</li>
 </ul>	
-
+</div>
+<div class="col-sm-8">
+	<div class="google-maps"><iframe width="500" height="200"
+            frameborder="0" style="border:0"
+            src="https://www.google.com/maps/embed/v1/place?key=AIzaSyD9DlzWco-IDu97eFELfA_lwZn17c0Qwnk
+            &q={{host.address|urlencode}}" allowfullscreen>
+        </iframe></div>
+</div>
+</div>
 
 
 
