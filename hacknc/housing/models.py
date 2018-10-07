@@ -219,6 +219,11 @@ class Tournament(models.Model):
         default='',
         help_text=_('Additional information about the tournament.'),
     )
+    is_matched = models.BooleanField(
+        default=False,
+        help_text=_('A boolean indicating if matching has been run yet.'),
+        verbose_name=_('is matched'),
+    )
     location = models.CharField(
         help_text=_('The location where the tournament is occurring.'),
         max_length=255,

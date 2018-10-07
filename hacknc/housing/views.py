@@ -14,6 +14,10 @@ class DummyDataView(LoginRequiredMixin, generic.FormView):
 
     def form_valid(self, form):
         form.save(user=self.request.user)
+        messages.success(
+            self.request,
+            'Succesfully created dummy data.',
+        )
 
         return redirect('profile')
 

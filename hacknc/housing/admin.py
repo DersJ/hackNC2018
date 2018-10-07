@@ -91,7 +91,7 @@ class TournamentAdmin(admin.ModelAdmin):
         (
             _('Additional Information'),
             {
-                'fields': ('description',),
+                'fields': ('description', 'is_matched'),
             },
         ),
         (
@@ -102,6 +102,13 @@ class TournamentAdmin(admin.ModelAdmin):
             },
         ),
     )
-    list_display = ('name', 'date_start', 'date_end', 'date_lockout')
+    list_display = (
+        'name',
+        'date_start',
+        'date_end',
+        'date_lockout',
+        'is_matched',
+    )
+    list_filter = ('is_matched',)
     readonly_fields = ('slug', 'slug_key')
     search_fields = ('location', 'name')

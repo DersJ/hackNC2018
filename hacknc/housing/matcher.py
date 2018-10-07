@@ -112,13 +112,14 @@ def match_teams(tournament):
 
         possible_matches_arr.append(possible_matches)
 
-    if not possible_matches_arr:
-        return
+    if possible_matches_arr:
+        max_matches = max(possible_matches_arr, key=len)
 
-    max_matches = max(possible_matches_arr, key=len)
+        for match in max_matches:
+            match.save()
+            for host in match.hosts_temp:
+                host.match = match
+                host.save()
 
-    for match in max_matches:
-        match.save()
-        for host in match.hosts_temp:
-            host.match = match
-            host.save()
+    tournament.is_matched = True
+    tournament.save()
