@@ -1,6 +1,18 @@
 from django import forms
 
-from housing import models
+from housing import data_factory, models
+
+
+class DummyDataForm(forms.Form):
+    tournament_name = forms.CharField(
+        help_text='The name of the tournament to create.',
+        initial='Easterns',
+    )
+
+    def save(self, user, *args, **kwargs):
+        tournament_name = self.cleaned_data['tournament_name']
+
+        data_factory.create_dummy_data(user, tournament_name)
 
 
 class TournamentForm(forms.ModelForm):

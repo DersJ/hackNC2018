@@ -69,7 +69,10 @@
 				<div class="row">
 					<div class="col text-right">
 					<ul class="list-inline">
-							<li class="list-inline-item"><a href="{% url 'admin:index' %}">Admin</a></li>
+							{% if request.user.is_staff %}
+								<li class="list-inline-item"><a href="{% url 'admin:index' %}">Admin</a></li>
+								<li class="list-inline-item"><a href="{% url 'housing:dummy-data' %}">Dummy Data</a></li>
+							{% endif %}
 							<li class="list-inline-item"><a href="{% url 'about' %} ">About</a></li>
 							<li class="list-inline-item"><a href="{% url 'contact' %} ">Contact</a></li>
 						</ul>

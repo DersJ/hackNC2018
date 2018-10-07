@@ -10,6 +10,11 @@ app_name = 'housing'
 
 urlpatterns = [
     path(
+        'dummy-data/',
+        views.DummyDataView.as_view(),
+        name='dummy-data',
+    ),
+    path(
         'tournaments/',
         views.TournamentListView.as_view(),
         name='tournament-list',

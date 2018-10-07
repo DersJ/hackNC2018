@@ -3,8 +3,19 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, redirect
 from django.utils import timezone
 from django.views import generic, View
-from .matcher import match_teams
+
 from housing import forms, models
+from .matcher import match_teams
+
+
+class DummyDataView(LoginRequiredMixin, generic.FormView):
+    form_class = forms.DummyDataForm
+    template_name = 'housing/dummy-data.html'
+
+    def form_valid(self, form):
+        form.save(user=self.request.user)
+
+        return redirect('profile')
 
 
 class TournamentCreateView(LoginRequiredMixin, generic.FormView):
