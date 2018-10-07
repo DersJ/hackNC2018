@@ -38,5 +38,8 @@ urlpatterns = [
         'tournaments/<slug-key:slug_key>/<slug:slug>/match/<uuid:uuid>/',
         views.MatchDetailView.as_view(),
         name='match-detail',
-        )
+        ),
+    path('tournaments/<slug-key:slug_key>/<slug:slug>/matcher/',
+        views.MatcherView.as_view(),
+        name='matcher'),
 ]
