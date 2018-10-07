@@ -27,6 +27,8 @@ HOSTS = (
     ('Miller', 6),
     ('Brown', 20),
     ('Lee', 5),
+    ('Davis', 12),
+    ('Edwards', 15),
 )
 
 
@@ -66,7 +68,7 @@ def create_dummy_data(user, tournament_name='Easterns'):
             email=f'{name}@example.com',
             guests_preferred=guests,
             name=name,
-            phone_number='(555) 555-5555',
+            phone_number='5555555555',
             tournament=tournament,
             user=user,
         )

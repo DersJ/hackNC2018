@@ -26,10 +26,17 @@
   {% endif %}
 
   <div class="row mt-5">
-    {% if tournament.is_locked %}
+    {% if tournament.is_matched %}
+    <div class="col-sm-12 alert alert-success">
+      <p class="font-weight-bold">Matches Generated</p>
+      <p>
+        Matches have been generated for this tournament. If you were registered as a host or team for this tournament, check the match results in <a href="{% url 'profile' %}">your profile</a>. No further registrations are being accepted for this tournament.
+      </p>
+    </div>
+    {% elif tournament.is_locked %}
     <div class="col-sm-12 alert alert-warning">
       <p><strong>Tournament Locked</strong></p>
-      <p>This tournament is no longer accepting new hosts or teams.</p>
+      <p>This tournament is no longer accepting new hosts or teams. Matches will be generated shortly.</p>
     </div>
     {% else %}
     <div class="col-md-6">
