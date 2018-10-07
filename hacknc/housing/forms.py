@@ -16,14 +16,21 @@ class TournamentForm(forms.ModelForm):
         data = super().clean()
 
         if data['date_start'] > data['date_end']:
-            raise forms.ValidationError(
-                "The tournament's end date must be on or after its start date."
+            self.add_error(
+                'date_end',
+                forms.ValidationError(
+                    "The tournament's end date must be on or after its start "
+                    "date."
+                ),
             )
 
         if data['date_lockout'].date() > data['date_start']:
-            raise forms.ValidationError(
-                "The tournament's lockout date must be before the start of "
-                "the tournament.",
+            self.add_error(
+                'date_lockout',
+                forms.ValidationError(
+                    "The tournament's lockout date must be before the start "
+                    "of the tournament.",
+                ),
             )
 
         return data
@@ -58,6 +65,23 @@ class HostForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
 
         self.tournament = tournament
+
+    def clean(self):
+        data = super().clean()
+
+        max_guests = data['guests_max']
+        preferred_guests = data['guests_preferred']
+
+        if max_guests is not None and max_guests < preferred_guests:
+            self.add_error(
+                'guests_max',
+                forms.ValidationError(
+                    "The maximum number of guests may not be lower than the "
+                    "preferred number of guests.",
+                ),
+            )
+
+        return data
 
     def save(self, user, *args, **kwargs):
         self.instance.tournament = self.tournament
