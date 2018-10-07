@@ -1,7 +1,35 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<p>{{match.team}}</p>
-<p>hello</p>
+<h3>{{match.team}}'s itinerary:</h3>
+
+<p>Arriving on {{match.team.arrival_time}} with {{match.team.player_count}} players.</p>
+
+{%for host in match.hosts.all%}
+
+<div class="row mb-2">
+<div class="col">
+
+<div class="card"><div class="card-body">
+<div class="card-title">
+<h4>{{host.name}} residence</h4></div>
+<h6>Contact Info:</h6>
+<ul>
+	<li>{{host.address}}</li>
+	<li>{{host.get_pretty_phone_number}}</li>
+	<li>{{host.email}}</li>
+</ul>	
+
+
+
+
+</div>
+<div class="card-footer text-muted">
+{%if host.guests_max%}Preferably would host {{host.guests_preferred}} team members. Can accomodate a max of {{host.guests_max}} team members.{% else%} Can accomodate {{host.guests_preferred}} team members.{% endif %}</div>
+</div>
+</div>
+</div>
+{% endfor %}
+
 
 {% endblock %}

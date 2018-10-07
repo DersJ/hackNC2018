@@ -28,7 +28,6 @@ class Host(models.Model):
         verbose_name=_('address'),
     )
     email = models.EmailField(
-        blank=True,
         default='',
         help_text=_('An email address to contact the host.'),
         max_length=255,
@@ -66,7 +65,6 @@ class Host(models.Model):
         verbose_name=_('name'),
     )
     phone_number = models.CharField(
-        blank=True,
         default='',
         help_text=_('A phone number to contact the host.'),
         max_length=30,
@@ -101,6 +99,10 @@ class Host(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_pretty_phone_number(self):
+        num = self.phone_number
+        return "({}){}-{}".format(num[:3], num[3:6], num[6:])
 
 
 class HostTeamMatch(models.Model):
