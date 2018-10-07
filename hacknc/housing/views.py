@@ -2,7 +2,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, redirect
 from django.utils import timezone
 from django.views import generic, View
-
+from .matcher import match_teams
 from housing import forms, models
 
 
@@ -100,7 +100,15 @@ class MatchDetailView(LoginRequiredMixin, generic.DetailView):
             id=self.kwargs.get('uuid'),
         )
 
-class MatcherView(LoginRequiredMixin, generic.FormView):
-    pass
+class MatcherView(LoginRequiredMixin, View):
+    def post(self, request, **kwargs):
+
+        tournament = get_object_or_404(
+            models.Tournament,
+            slug=kwargs.get('slug'),
+            slug_key=kwargs.get('slug_key'),
+        )
+        match_teams(tournament)
+        return redirect('profile')
 
 
