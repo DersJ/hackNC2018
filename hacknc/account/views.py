@@ -1,11 +1,16 @@
+from django.contrib.auth import login, authenticate
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from account.forms import SignUpForm
-from django.contrib.auth import login, authenticate
+from django.utils import timezone
 from django.views import generic
+
+from account.forms import SignUpForm
+from housing import models
+
 
 def loginview(request):
 	return render(request, 'login.html')
+
 
 def signup(request):
     if request.method == 'POST':
@@ -21,10 +26,26 @@ def signup(request):
         form = SignUpForm()
     return render(request, 'registration/signup.html', {'form': form})
 
-class ProfileView(generic.DetailView):
 
-    context_object_name = 'tournament'
+class ProfileView(generic.DetailView):
     template_name = 'registration/profile.html'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        now = timezone.now()
+
+        context['hosts'] = models.Host.objects.filter(
+            tournament__date_end__gte=now,
+        )
+        context['teams'] = models.Team.objects.filter(
+            tournament__date_end__gte=now,
+        )
+        context['tournaments'] = models.Tournament.objects.filter(
+            date_end__gte=now,
+        )
+
+        return context
+
 
     def get_object(self):
         return self.request.user
