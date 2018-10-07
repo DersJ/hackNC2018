@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% load crispy_forms_tags %}
+{% load humanize %}
 
 {% block content %}
 {% for tournament in user.tournaments.all %}
@@ -16,14 +17,19 @@
 				</button>
 			</div>
 			<div class="modal-body">
+				{% if not tournament.is_locked %}
+					<div class="alert alert-warning">
+						Cannot run matcher until {{ tournament.date_lockout|naturaltime }} when tournament is locked.
+					</div>
+				{% endif %}
 				<h6>Match Status per Team</h6>
 				<div class="list-group">
 				{% for team in tournament.teams.all %}
 
 				{% if team.hostteammatch %}
-				<a href="{{team.hostteammatch.get_absolute_url}}" class="list-group-item list-group-item-action">{{team.name}} - matched with host(s): 
+				<a href="{{team.hostteammatch.get_absolute_url}}" class="list-group-item list-group-item-action">{{team.name}} - matched with host(s):
 				{% for host in team.hostteammatch.hosts.all%}
-				{{host.name}}, 
+				{{host.name}},
 				{% endfor %}</a>
 
 				{% else %}
@@ -34,9 +40,11 @@
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				{% if tournament.is_locked %}
 				<form action="{% url 'housing:matcher' tournament.slug_key tournament.slug %}" method="POST">
 					{% csrf_token %}
 				<button type="submit" class="btn btn-primary">Run Matcher</button>
+				{% endif %}
 			</form>
 			</div>
 		</div>
@@ -58,7 +66,7 @@
 					{% else %}
 					<h4 class="card-title">@{{user.username}}</h4>
 					{% endif %}
-					
+
 					<p class="card-text">{{user.email}}</p>
 				</div>
 			</div>
@@ -71,14 +79,14 @@
 			<ul class="list-group">
 				{% for tournament in user.tournaments.all %}
 				<li class="list-group-item">
-						
+
 					<div class="row d-flex align-items-center">
 					<div class="col-sm-8">
 					<h5>{{tournament.name}}</h5>
-					
+
 					{% if tournament.is_locked %}
 					Locked on {{tournament.date_lockout}}.
-					{% else %}	
+					{% else %}
 					Unlocked until {{tournament.date_lockout}}.
 					{% endif %}
 					</div>
@@ -101,9 +109,9 @@
 				{% for team in user.teams.all %}
 
 				{% if team.hostteammatch %}
-				<a href="{{team.hostteammatch.get_absolute_url}}" class="list-group-item list-group-item-action">{{team.name}} - matched with host(s): 
+				<a href="{{team.hostteammatch.get_absolute_url}}" class="list-group-item list-group-item-action">{{team.name}} - matched with host(s):
 				{% for host in team.hostteammatch.hosts.all%}
-				{{host.name}}, 
+				{{host.name}},
 				{% endfor %}</a>
 
 				{% else %}
