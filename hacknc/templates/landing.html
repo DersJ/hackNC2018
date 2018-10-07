@@ -11,10 +11,10 @@
 			<p class="lead mb-4">
 				Find housing for your team or host a group of players. It's all organized for you.
 			</p>
-			<a class="btn btn-primary d-inline-block mr-3" href="{% url 'housing:tournament-list' %}" role="button">
+			<a class="btn btn-primary d-inline-block mx-1 my-3" href="{% url 'housing:tournament-list' %}" role="button">
 				Find a Tournament
 			</a>
-			<a class="btn btn-secondary d-inline-block" href="{% url 'housing:tournament-create' %}" role="button">
+			<a class="btn btn-secondary d-inline-block mx-1 my-3" href="{% url 'housing:tournament-create' %}" role="button">
 				Register a Tournament
 			</a>
 		</div>
@@ -22,13 +22,21 @@
 </div>
 
 <div class="container">
-	<div class="row">
-		<div class="col-sm-12 col-md-6 my-5">
+	<div class="row my-5">
+		<div class="col-sm-12 col-md-6">
 			<h2 class="border-bottom mb-4">For Teams</h2>
 			<p>
 				Are you looking for a place to stay at a tournament? Register your team and we'll match you with host families nearby.
 			</p>
 			<a class="btn btn-primary" href="{% url 'housing:tournament-list' %}">Find Your Tournament</a>
+		</div>
+		<div class="d-none d-md-block col-md-6">
+			<img alt="map" class="img-fluid img-thumbnail" src="{% static 'images/map.jpg' %}" />
+		</div>
+	</div>
+	<div class="row my-5">
+		<div class="d-none d-md-block col-md-6">
+			<img alt="house" class="img-fluid img-thumbnail" src="{% static 'images/house.jpg' %}" />
 		</div>
 		<div class="col-sm-12 col-md-6 my-5">
 			<h2 class="border-bottom mb-4">For Hosts</h2>
