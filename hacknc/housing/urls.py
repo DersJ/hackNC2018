@@ -34,4 +34,9 @@ urlpatterns = [
         views.TeamCreateView.as_view(), 
         name='team-create',
     ),
+    path(
+        'tournaments/<slug-key:slug_key>/<slug:slug>/match/<uuid:uuid>/',
+        views.MatchDetailView.as_view(),
+        name='match-detail',
+        )
 ]

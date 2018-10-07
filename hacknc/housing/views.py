@@ -62,14 +62,8 @@ class HostCreateView(LoginRequiredMixin, generic.FormView):
         return kwargs
 
     def form_valid(self, form):
-        tournament = get_object_or_404(
-            models.Tournament,
-            slug=self.kwargs.get('slug'),
-            slug_key=self.kwargs.get('slug_key'),
-        )
-
-        host = form.save(tournament)
-        return redirect(tournament.get_absolute_url())
+        host = form.save(self.request.user)
+        return redirect(form.tournament.get_absolute_url())
 
 
 class TeamCreateView(LoginRequiredMixin, generic.FormView):
@@ -85,16 +79,25 @@ class TeamCreateView(LoginRequiredMixin, generic.FormView):
         return kwargs
 
     def form_valid(self, form):
-        tournament = get_object_or_404(
-            models.Tournament,
-            slug=self.kwargs.get('slug'),
-            slug_key=self.kwargs.get('slug_key'),
+        team = form.save(self.request.user)
+        return redirect(form.tournament.get_absolute_url())
+
+class MatchDetailView(LoginRequiredMixin, generic.DetailView):
+
+    context_object_name = 'match'
+    template_name = 'housing/match-detail.html'
+
+    def get_object(self):
+        """
+        Get the tournament instance whose parameters are specified in
+        the URL.
+
+        Returns:
+            The tournament instance with the given slug and slug key.
+        """
+        return get_object_or_404(
+            models.HostTeamMatch,
+            id=self.kwargs.get('uuid'),
         )
-
-        team = form.save(tournament)
-        return redirect(tournament.get_absolute_url())
-
-
-
 
 

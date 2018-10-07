@@ -7,7 +7,7 @@
 	<div class="row">
 		<div class="col-sm-4">
 
-			<div class="card" style="width: 18rem">
+			<div class="card">
 				<div class="card-body">
 					{% if user.name %}
 					<h4 class="card-title">{{user.name}}</h4>
@@ -23,7 +23,42 @@
 
 		</div>
 		<div class="col-sm-8">
-			<h5>Match Info Here</h5>
+			<h3>Match Info</h3>
+
+			<h4>Tournaments</h4>
+			<div class="list-group">
+				{% for tournament in user.tournaments.all %}
+				<a href="#" class="list-group-item list-group-item-action">{{tournament.name}}</a>
+				{% endfor %}
+			</div>
+			<br>
+			<h4>Teams</h4>
+			<div class="list-group">
+				{% for team in user.teams.all %}
+
+				{% if team.hostteammatch %}
+				<a href="{{team.hostteammatch.get_absolute_url}}" class="list-group-item list-group-item-action">{{team.name}} - matched with host(s): 
+				{% for host in team.hostteammatch.hosts.all%}
+				{{host.name}}, 
+				{% endfor %}</a>
+
+				{% else %}
+				<a href="#" class="list-group-item list-group-item-action">{{team.name}} - no match yet</a>
+				{% endif %}
+				{% endfor %}
+			</div>
+			<br>
+			<h4>Hosts</h4>
+			<div class="list-group">
+				{% for host in user.hosts.all %}
+				{% if host.match %}
+				<a href="{{host.match.get_absolute_url}}" class="list-group-item list-group-item-action">{{host.name}} - matched with team {{host.match.team.name}}</a>
+				{% else %}
+				<a href="#" class="list-group-item list-group-item-action">{{host.name}} - no match yet</a>
+				{% endif %}
+				{% endfor %}
+			</div>
+
 		</div>
 	</div>
 </div>

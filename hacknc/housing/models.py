@@ -72,6 +72,16 @@ class Host(models.Model):
         max_length=30,
         verbose_name=_('phone number'),
     )
+
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,         
+        on_delete=models.CASCADE,
+        help_text=_('The user who registered the host.'),
+        related_name='hosts',
+        related_query_name='host',
+
+    )
+
     time_created = models.DateTimeField(
         auto_now_add=True,
         verbose_name=_('time created'),
@@ -122,6 +132,12 @@ class HostTeamMatch(models.Model):
     def __str__(self):
         return f'Match for Team {self.team}'
 
+    def get_absolute_url(self):
+        return reverse(
+            'housing:match-detail',
+            kwargs={'slug': self.team.tournament.slug, 'slug_key': self.team.tournament.slug_key, 'uuid': self.id},
+        )
+
 
 class Team(models.Model):
     """
@@ -146,6 +162,15 @@ class Team(models.Model):
         help_text=_('The number of team members who need housing.'),
         verbose_name=_('player count'),
     )
+
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name='teams',
+        related_query_name='team',
+        help_text=_('The user who registered the Team.'),
+    )
+
     time_created = models.DateTimeField(
         auto_now_add=True,
         help_text=_('The time the team registered.'),

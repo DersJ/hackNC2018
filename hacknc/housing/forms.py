@@ -22,8 +22,9 @@ class HostForm(forms.ModelForm):
 	class Meta:
 		fields = ('name', 'phone_number', 'email', 'address', 'guests_max', 'guests_preferred')
 		model = models.Host
-	def save(self, *args, **kwargs):
+	def save(self, user, *args, **kwargs):
 		self.instance.tournament = self.tournament
+		self.instance.user = user
 		return super().save(*args, **kwargs)
 	def __init__(self, tournament, *args, **kwargs):
 		super().__init__(*args, **kwargs)
@@ -34,8 +35,9 @@ class TeamForm(forms.ModelForm):
 	class Meta:
 		fields = ('arrival_time', 'name', 'player_count')
 		model = models.Team
-	def save(self, *args, **kwargs):
+	def save(self, user, *args, **kwargs):
 		self.instance.tournament = self.tournament
+		self.instance.user= user
 		return super().save(*args, **kwargs)
 	def __init__(self, tournament, *args, **kwargs):
 		super().__init__(*args, **kwargs)
