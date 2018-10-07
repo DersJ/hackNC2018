@@ -36,12 +36,15 @@ class ProfileView(generic.DetailView):
 
         context['hosts'] = models.Host.objects.filter(
             tournament__date_end__gte=now,
+            user=self.request.user,
         )
         context['teams'] = models.Team.objects.filter(
             tournament__date_end__gte=now,
+            user=self.request.user,
         )
         context['tournaments'] = models.Tournament.objects.filter(
             date_end__gte=now,
+            user=self.request.user,
         )
 
         return context
