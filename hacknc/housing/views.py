@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, redirect
 from django.utils import timezone
@@ -63,6 +64,11 @@ class HostCreateView(LoginRequiredMixin, generic.FormView):
 
     def form_valid(self, form):
         host = form.save(self.request.user)
+        messages.success(
+            self.request,
+            f'Registered {host.name} as a host for {form.tournament}.',
+        )
+
         return redirect(form.tournament.get_absolute_url())
 
 
@@ -80,6 +86,11 @@ class TeamCreateView(LoginRequiredMixin, generic.FormView):
 
     def form_valid(self, form):
         team = form.save(self.request.user)
+        messages.success(
+            self.request,
+            f'Registered {team} as a team for {team.tournament}',
+        )
+
         return redirect(form.tournament.get_absolute_url())
 
 class MatchDetailView(LoginRequiredMixin, generic.DetailView):
@@ -102,13 +113,18 @@ class MatchDetailView(LoginRequiredMixin, generic.DetailView):
 
 class MatcherView(LoginRequiredMixin, View):
     def post(self, request, **kwargs):
-
         tournament = get_object_or_404(
             models.Tournament,
             slug=kwargs.get('slug'),
             slug_key=kwargs.get('slug_key'),
         )
         match_teams(tournament)
+
+        messages.success(
+            request,
+            f'Generated matches for {tournament}',
+        )
+
         return redirect('profile')
 
 

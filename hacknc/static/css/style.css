@@ -39,4 +39,14 @@ main {
   max-width: 70%;
 }
 
+.messages {
+  position: absolute;
+  left: 50%;
+  max-width: 90%;
+  top: 3em;
+  transform: translateX(-50%);
+  width: 30em;
+  z-index: 100;
+}
+
 
