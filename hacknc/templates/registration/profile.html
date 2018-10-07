@@ -129,10 +129,8 @@
 						</p>
 						{% if team.hostteammatch %}
 							<p class="mb-0">
-								Matched with host{{ team.hostteammatch.hosts.count|pluralize }}
-								{% for host in team.hostteammatch.hosts.all %}
-									{{ host.name }}{% if forloop.last %}, and{% else %},{% endif %}
-								{% endfor %}
+								Matched with host{{ team.hostteammatch.hosts.count|pluralize }}:
+								{{ team.hostteammatch.hosts.all|join:', ' }}
 							</p>
 						{% endif %}
 					</a>
