@@ -5,27 +5,33 @@
 	<h1 class="border-bottom pb-2 mb-5">{{ tournament.name }}</h1>
 
 	<div class="row my-3">
-    	<div class="col-sm-4">
+    	<div class="col-sm-3">
     		<h3>Start Date</h3>
     	</div>
-    	<div class="col-sm-4">
+    	<div class="col-sm-3">
     		<h3>End Date</h3>
     	</div>
-    	<div class="col-sm-4">
+    	<div class="col-sm-3">
     		<h3>Location</h3>
     	</div>
+        <div class="col-sm-3">
+            <h3>Register by</h3>
+        </div>
     </div>
 
     <div class="row">
-    	<div class="col-md-4">
+    	<div class="col-md-3">
     		<p>{{ tournament.date_start }}</p>
     	</div>
-    	<div class="col-md-4">
+    	<div class="col-md-3">
     		<p>{{ tournament.date_end }}</p>
     	</div>
-    	<div class="col-md-4">
+    	<div class="col-md-3">
     		<p>{{ tournament.location }}</p>
     	</div>
+        <div class="col-md-3">
+            <p>{{ tournament.date_lockout }}</p>
+        </div>
     </div>
 
     <div class="my-5">

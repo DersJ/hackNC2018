@@ -12,7 +12,7 @@ main {
 
 .hero {
   background-size: cover;
-  background-position: center;
+  background-position: top center;
   min-height: 90vh;
 }
 
