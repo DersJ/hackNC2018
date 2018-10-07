@@ -19,13 +19,19 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'secret'
-
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DJANGO_DEBUG', 'false').lower() == 'true'
 
-ALLOWED_HOSTS = []
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '')
+if DEBUG and not SECRET_KEY:
+    SECRET_KEY = 'secret'
+
+host_list = os.environ.get('DJANGO_ALLOWED_HOSTS', '')
+if host_list:
+    ALLOWED_HOSTS = host_list.split(',')
+else:
+    ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -124,12 +130,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
-
-
+STATIC_ROOT = os.environ.get('DJANGO_STATIC_ROOT', None)
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
+MEDIA_ROOT = os.environ.get('DJANGO_MEDIA_ROOT', None)
 
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
 
 LOGIN_REDIRECT_URL = 'profile'
 LOGIN_URL = 'login'
