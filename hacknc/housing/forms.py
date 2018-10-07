@@ -103,6 +103,7 @@ class HostForm(forms.ModelForm):
 
 
 class TeamForm(forms.ModelForm):
+    arrival_time = forms.DateTimeField(help_text="Enter as YYYY-MM-DD HH:MM (24hr time).")
     class Meta:
         fields = ('arrival_time', 'name', 'player_count')
         model = models.Team
