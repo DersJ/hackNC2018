@@ -53,10 +53,29 @@
 			<h4>Tournaments</h4>
 			<ul class="list-group">
 				{% for tournament in user.tournaments.all %}
-				<li class="list-group-item "><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-					{{tournament.name}}
-				</button></li>
+				<li class="list-group-item">
+						
+					<div class="row d-flex align-items-center">
+					<div class="col-sm-8">
+					<h5>{{tournament.name}}</h5>
+					
+					{% if tournament.is_locked %}
+					Locked on {{tournament.date_lockout}}.
+					{% else %}	
+					Unlocked until {{tournament.date_lockout}}.
+					{% endif %}
+					</div>
+					<div class="col-sm-4 text-right">
+						{% if tournament.is_locked %}
+					<button type="button" class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#exampleModal">View more</button>
+					{% else %}
+					<button type="button" class="btn btn-sm btn-outline-secondary" disabled="">View More</button>
+					{% endif %}
+					</div>
+				</div>
+				</li>
 				{% endfor %}
+
 			</ul>
 
 			<br>
