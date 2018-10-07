@@ -3,6 +3,7 @@ import uuid
 from django.conf import settings
 from django.db import models
 from django.urls import reverse
+from django.utils import timezone
 from django.utils.crypto import get_random_string
 from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
@@ -72,7 +73,7 @@ class Host(models.Model):
     )
 
     user = models.ForeignKey(
-        settings.AUTH_USER_MODEL,         
+        settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         help_text=_('The user who registered the host.'),
         related_name='hosts',
@@ -262,6 +263,10 @@ class Tournament(models.Model):
             'housing:tournament-detail',
             kwargs={'slug': self.slug, 'slug_key': self.slug_key},
         )
+
+    @property
+    def is_locked(self):
+        return self.date_lockout < timezone.now()
 
     def save(self, *args, **kwargs):
         if not self.slug:
