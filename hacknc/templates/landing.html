@@ -1,24 +1,45 @@
 {% extends 'base.html' %}
 
-{% block content %}
+{% load static %}
 
-<div class="jumbotron">
-	<h1 class="display-2">
-		Ultimate Housing
-	</h1>
-	<p class="lead">
-		An application that easily finds your team free housing.
-	</p>
-	<hr class="my-2">
-	<p>
-		Create a tournament or find an existing one
-	</p>
-	<a class="btn btn-primary" href="{% url 'housing:tournament-list' %}" role="button">
-		Find Tournament
-	</a>
-	<a class="btn btn-secondary" href="{% url 'housing:tournament-create' %}" role="button">
-		Register Tournament
-	</a>
+{% block main %}
+
+<div class="hero" style="background-image: url('{% static 'images/mountains.jpg' %}">
+	<div class="container">
+		<div class="jumbotron jumbotron--hero my-5 text-center">
+			<h1 class="display-2">
+				Ultimate Housing
+			</h1>
+			<p class="lead mb-4">
+				Find housing for your team or host a group of players. It's all organized for you.
+			</p>
+			<a class="btn btn-primary d-inline-block mr-3" href="{% url 'housing:tournament-list' %}" role="button">
+				Find a Tournament
+			</a>
+			<a class="btn btn-secondary d-inline-block" href="{% url 'housing:tournament-create' %}" role="button">
+				Register a Tournament
+			</a>
+		</div>
+	</div>
+</div>
+
+<div class="container">
+	<div class="row">
+		<div class="col-sm-12 col-md-6 my-5">
+			<h2 class="border-bottom mb-4">For Teams</h2>
+			<p>
+				Are you looking for a place to stay at a tournament? Register your team and we'll match you with host families nearby.
+			</p>
+			<a class="btn btn-primary" href="{% url 'housing:tournament-list' %}">Find Your Tournament</a>
+		</div>
+		<div class="col-sm-12 col-md-6 my-5">
+			<h2 class="border-bottom mb-4">For Hosts</h2>
+			<p>
+				Do you have extra space and want to host a team of friendly folks for a weekend? Register your space for any available tournament and we'll find a team in need.
+			</p>
+			<a class="btn btn-primary" href="{% url 'housing:tournament-list' %}">Host For A Tournament</a>
+		</div>
+	</div>
 </div>
 
 {% endblock %}

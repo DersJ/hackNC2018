@@ -10,6 +10,16 @@ main {
   margin: 2em 0;
 }
 
+.hero {
+  background-size: cover;
+  background-position: center;
+  min-height: 90vh;
+}
+
+.jumbotron--hero {
+  opacity: .8;
+}
+
 .map iframe {
     position:absolute;
     top:0;
